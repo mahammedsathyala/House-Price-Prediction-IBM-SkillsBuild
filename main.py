@@ -20,8 +20,11 @@ sys.path.insert(0, SRC_DIR)
 
 # pyrefly: ignore [missing-import]
 from data_understanding import understand_data
+# pyrefly: ignore [missing-import]
 from data_cleaning       import load_and_clean
+# pyrefly: ignore [missing-import]
 from eda                 import run_eda
+# pyrefly: ignore [missing-import]
 from model_training      import train_models
 
 DATA_PATH = os.path.join(BASE_DIR, "data", "data.csv")

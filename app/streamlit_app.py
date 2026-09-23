@@ -29,6 +29,7 @@ BASE_DIR = os.path.dirname(APP_DIR)
 SRC_DIR  = os.path.join(BASE_DIR, "src")
 sys.path.insert(0, SRC_DIR)
 
+# pyrefly: ignore [missing-import]
 from data_cleaning import load_and_clean
 
 DATA_PATH  = os.path.join(BASE_DIR, "data", "data.csv")
