@@ -1,4 +1,4 @@
-# 🏠 House Price Prediction Using Machine Learning
+# 🏠 House Price Prediction
 
 An end-to-end Data Analytics and Machine Learning regression project that analyzes residential real-estate transaction data and predicts house prices based on physical, structural, and geographic characteristics. Developed as part of the **AICTE | IBM SkillsBuild Data Analytics with AI Academic Internship 2026**.
 
