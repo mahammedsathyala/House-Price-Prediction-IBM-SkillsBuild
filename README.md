@@ -454,58 +454,6 @@ streamlit run app/streamlit_app.py
 
 ---
 
-## 🎓 Viva Questions & Answers
-
-**Q1. What is the target variable in this project?**  
-*Answer:* The target variable is `price` (USD), representing the final transaction sale price of residential properties in King County, Washington.
-
-**Q2. Why is house price prediction formulated as a regression problem?**  
-*Answer:* Because the target variable `price` is continuous, unbounded, and numerical, requiring regression algorithms to predict numerical values rather than discrete classification labels.
-
-**Q3. What data anomalies were found in the raw dataset, and how were they handled?**  
-*Answer:* The raw dataset contained 49 records with `price = $0.00` and several extreme luxury outliers (up to $26.59M). Rather than discarding data, 1st and 99th percentile winsorization was applied to `price`, `sqft_living`, and `sqft_lot`, capping extremes to the 1st ($175,000) and 99th ($1.96M) percentiles.
-
-**Q4. Why were the `street` and `country` columns dropped?**  
-*Answer:* `street` had 4,525 unique text categories out of 4,600 rows (extreme cardinality), which would cause extreme overfitting without providing generalizable patterns. `country` had zero variance ("USA" across all records), providing zero statistical information.
-
-**Q5. What is feature engineering and what domain features did you create?**  
-*Answer:* Feature engineering creates new predictive indicators from existing raw columns. We engineered: `house_age` (`sale_year - yr_built`), `was_renovated` (binary flag), `renovation_age` (`sale_year - yr_renovated`), `total_sqft` (`sqft_above + sqft_basement`), `living_to_lot` ratio, `has_basement` flag, `sale_year`, `sale_month`, numerical `zip_code`, and `city_encoded`.
-
-**Q6. Which machine learning models were implemented and compared?**  
-*Answer:* We evaluated four models: Linear Regression (parametric baseline), Random Forest Regressor (bagging ensemble), Gradient Boosting Regressor (boosting ensemble), and XGBoost Regressor (regularized gradient boosting).
-
-**Q7. How did you prevent data leakage during preprocessing and scaling?**  
-*Answer:* The 80/20 train/test split was performed prior to model fitting. `StandardScaler` was wrapped within a Scikit-Learn `Pipeline`, ensuring that statistical parameters (mean and standard deviation) were calculated strictly on the training set and applied to the test set without leakage.
-
-**Q8. What is MAE, RMSE, and $R^2$, and what were your final test metrics?**  
-*Answer:*  
-* **MAE:** Mean Absolute Error measures average dollar prediction error ($|\hat{y} - y|$). Best: **$105,383**.  
-* **RMSE:** Root Mean Squared Error measures standard deviation of residuals, penalizing large mistakes. Best: **$202,060**.  
-* **$R^2$:** Coefficient of Determination measures the proportion of variance explained. Best: **0.6213** (XGBoost), explaining 62.13% of test price variance.
-
-**Q9. Why did XGBoost outperform Linear Regression?**  
-*Answer:* Linear Regression assumes strictly linear relationships and additive effects. In contrast, XGBoost captures non-linear feature curves, multi-variable interactions (e.g., location multiplied by living area), handles collinear features robustly, and incorporates L1/L2 regularization to prevent overfitting.
-
-**Q10. What is the difference between Random Forest and Gradient Boosting?**  
-*Answer:* Random Forest is a bagging technique that trains multiple decision trees independently in parallel on bootstrap samples and averages their outputs. Gradient Boosting is a sequential boosting technique where each tree is trained to correct the residual errors of the preceding trees.
-
-**Q11. What were the top three most important features identified by the model?**  
-*Answer:* As recorded in `models/feature_importance.json`, the top three features are: `total_sqft` (27.54%), `sqft_living` (13.92%), and `has_basement` (12.49%).
-
-**Q12. How does the interactive Streamlit application work?**  
-*Answer:* The application loads the serialized pipeline (`models/best_model.pkl`) using `@st.cache_resource`. When a user submits property inputs, the application computes the engineered features, aligns them to the 22-column feature list, passes the vector through the pipeline's scaler and XGBoost model, and displays the real-time prediction.
-
-**Q13. Why did you use Winsorization instead of dropping outlier rows?**  
-*Answer:* Dropping outliers discards potentially valuable real-world samples and reduces training sample size. Winsorization bounds extreme values to defined percentiles, retaining the record while preventing extreme gradient updates.
-
-**Q14. What is the purpose of the `living_to_lot` ratio?**  
-*Answer:* It indicates property density—whether a home represents an expansive suburban property with substantial acreage or a high-density urban dwelling occupying most of its parcel.
-
-**Q15. What are the key limitations of this project?**  
-*Answer:* The dataset is confined to 2014 transactions in King County, Washington, and lacks macroeconomic indicators (mortgage interest rates, inflation), hyperlocal factors (school district ratings, crime rates), and image data (interior finishes and curb appeal).
-
----
-
 ## 🛠️ Technology Stack
 
 | Technology | Category | Purpose in Project |
