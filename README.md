@@ -351,8 +351,11 @@ All insights are derived from mathematical computations performed on `data/data.
 House-Price-Prediction-IBM-SkillsBuild/
 ├── .gitignore                      # Git exclusion rules (__pycache__, IDE configs)
 ├── README.md                       # Comprehensive project documentation
+├── SathyalaMahammed_ProjectReport.docx # Professional Microsoft Word academic project report
+├── SATHYALA MAHAMMED_House Predection.ipynb # Complete project Jupyter notebook
 ├── requirements.txt                # Exact Python library dependencies
 ├── main.py                         # Master pipeline entry point
+├── build_full_report.py            # Automated script to generate Word report
 ├── app/
 │   └── streamlit_app.py            # 5-page interactive Streamlit web application
 ├── data/
